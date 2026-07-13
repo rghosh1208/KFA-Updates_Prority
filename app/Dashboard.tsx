@@ -1,17 +1,10 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { MONTH_DEFS, type Payload, type Health } from "@/lib/types";
+import { MONTH_DEFS, type Payload } from "@/lib/types";
 
 const fmtPct = (v: number | null | undefined) =>
   v == null ? "—" : Math.round(v * 100) + "%";
-
-function healthLabel(h: Health | string) {
-  if (h === "GREEN") return "Healthy";
-  if (h === "YELLOW") return "At Watch";
-  if (h === "RED") return "At Risk";
-  return h;
-}
 
 export default function Dashboard({ payload }: { payload: Payload }) {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -140,10 +133,6 @@ export default function Dashboard({ payload }: { payload: Payload }) {
                 >
                   <span className="tab-code">{pr.code}</span>
                   <span className="tab-title">{pr.title}</span>
-                  <span className={`health-bar ${pr.health}`} aria-hidden="true" />
-                  <span className="health-text">
-                    Health: {pr.health} — {healthLabel(pr.health)}
-                  </span>
                 </button>
               </li>
             ))}
@@ -189,12 +178,6 @@ export default function Dashboard({ payload }: { payload: Payload }) {
                   </p>
                   <p className="tagline">{p.tagline}</p>
                 </div>
-                <span className={`health-badge ${p.health}`} role="status">
-                  <span aria-hidden="true">{p.health}</span>
-                  <span className="sr-only">
-                    Health: {p.health} — {healthLabel(p.health)}
-                  </span>
-                </span>
               </div>
 
               {(p.issue || p.needs) && (
