@@ -350,17 +350,6 @@ export default function Dashboard({ payload }: { payload: Payload }) {
                               ))}
                             </div>
                           </section>
-
-                          <section className="wr-grid" aria-label={`Assessment for ${pp.name}`}>
-                            <div className="wr work" aria-labelledby={`${progId}-w`}>
-                              <h4 id={`${progId}-w`}>What&apos;s Working</h4>
-                              <p>{pp.working}</p>
-                            </div>
-                            <div className="wr risk" aria-labelledby={`${progId}-r`}>
-                              <h4 id={`${progId}-r`}>What&apos;s At Risk</h4>
-                              <p>{pp.risk}</p>
-                            </div>
-                          </section>
                         </div>
                       )}
                     </li>
