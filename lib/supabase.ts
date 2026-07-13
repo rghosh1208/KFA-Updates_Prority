@@ -9,7 +9,15 @@ export function getReadClient() {
       "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY"
     );
   }
-  return createClient(url, anon, { auth: { persistSession: false } });
+  return createClient(url, anon, {
+    auth: { persistSession: false },
+    // Never let Next.js cache the dashboard read — always fetch fresh data
+    // so edits synced from Smartsheet show up on the next page load.
+    global: {
+      fetch: (input: RequestInfo | URL, init?: RequestInit) =>
+        fetch(input, { ...init, cache: "no-store" }),
+    },
+  });
 }
 
 // SERVER ONLY: full-access client used by the sync route to write rows.
