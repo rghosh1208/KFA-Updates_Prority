@@ -1,13 +1,20 @@
 // Shared types for the COE KFA dashboard.
 
-// Short month keys, in display order. Add "aug", "sep"... here as the year
-// progresses and the sync + UI will pick them up automatically.
+// Short month keys, in display order. Months with no data on any program are
+// filtered out by the UI (see `activeMonths` in Dashboard.tsx), so listing the
+// remainder of the year here is safe — a month appears the moment the first
+// program reports it, with no code change required.
 export const MONTH_DEFS = [
   { key: "mar", short: "Mar", full: "March" },
   { key: "apr", short: "Apr", full: "April" },
   { key: "may", short: "May", full: "May" },
   { key: "jun", short: "Jun", full: "June" },
   { key: "jul", short: "Jul", full: "July" },
+  { key: "aug", short: "Aug", full: "August" },
+  { key: "sep", short: "Sep", full: "September" },
+  { key: "oct", short: "Oct", full: "October" },
+  { key: "nov", short: "Nov", full: "November" },
+  { key: "dec", short: "Dec", full: "December" },
 ] as const;
 
 export type MonthKey = (typeof MONTH_DEFS)[number]["key"];
